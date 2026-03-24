@@ -37,7 +37,7 @@ st.title("OSC Control Dynamique avec Streamlit")
 # --- Config OSC ---
 ips_input = st.text_input(
     "Adresses IP (séparées par des virgules)",
-    value="192.168.101.46 192.168.101.218"
+    value="192.168.101.46 192.168.101.218 192.168.101.35"
 )
 port = st.number_input("Port du serveur OSC", value=8001, step=1)
 
