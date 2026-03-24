@@ -1,42 +1,77 @@
 import streamlit as st
 from pythonosc import udp_client
+from ipaddress import ip_address
+
+import re
+
+def format_string(s: str) -> str:
+    # Supprimer le préfixe jusqu'au premier underscore
+    parts = s.split('_', 1)
+    if len(parts) < 2:
+        return s  # au cas où le format est inattendu
+    
+    core = parts[1]  # "setWorld1_3"
+    
+    # Séparer la partie texte et le nombre final
+    #match = re.match(r'([a-zA-Z]+\d*)_(\d+)', core)
+    #if not match:
+    #    return core
+    
+    #text_part = match.group(1)
+    #number_part = match.group(2)
+    
+    # Mettre la première lettre en majuscule
+    #text_part = text_part.capitalize()
+    text_part = core.capitalize()
+    
+    #return f"{text_part} {number_part}"
+    return f"{text_part}"
+
+
+#s = "velo_setWorld1_3"
+#print(format_string(s))
+
 
 st.title("OSC Control Dynamique avec Streamlit")
 
 # --- Config OSC ---
-ip = st.text_input("Adresse IP du serveur OSC", value="192.168.101.46", key="ip_input")
-port = st.number_input("Port du serveur OSC", value=8001, step=1, key="port_input")
+ips_input = st.text_input(
+    "Adresses IP (séparées par des virgules)",
+    value="192.168.101.46 192.168.101.218"
+)
+port = st.number_input("Port du serveur OSC", value=8001, step=1)
 
-# Vérification simple IP
-try:
-    from ipaddress import ip_address
-    ip_address(ip)
-    valid_ip = True
-except ValueError:
-    st.error("Adresse IP invalide !")
-    valid_ip = False
+ips = [ip.strip() for ip in ips_input.split(" ")]
 
-if valid_ip:
-    client = udp_client.SimpleUDPClient(ip, port)
+clients = []
+valid_ips = []
+
+for ip in ips:
+    try:
+        ip_address(ip)
+        clients.append(udp_client.SimpleUDPClient(ip, port))
+        valid_ips.append(ip)
+    except ValueError:
+        st.error(f"IP invalide : {ip}")
 
     # --- Catégories et listes de boutons ---
     categories = {
     "jeux1": {
-        "Valeurs fixes": [11, 12, 13, 14, 15, 16],
-        "Valeurs spéciales": [21, 22, 23, 24],
-        "TEST": list(range(10)),
+        "Velo": ["velo_setWorld1_3", "velo_setWorld2_1", "velo_start", "Velo_4", "Velo_5", "Velo_6"],
+        "Valeurs spéciales": ["TEST"],
+        "TEST": ["TEST1", "TEST2", "TEST3"],
         "Autres commandes": ["Start", "Stop", "Reset"]
     },
     "jeux2": {
-        "Valeurs fixes": [101, 102, 103],
-        "Valeurs spéciales": [201, 202],
-        "TEST": [0, 1, 2],
+        "Valeurs fixes": ["Start", "Start", "Start"],
+        "Valeurs spéciales": ["TEST"],
+        "TEST": ["TEST1", "TEST2", "TEST3"],
         "Autres commandes": ["Play", "Pause"]
     },
     "jeux3": {
-        "Valeurs fixes": [7, 8, 9],
-        "Valeurs spéciales": [30, 31],
-        "TEST": [5, 6, 7],
+        "Valeurs fixes": ["Go", "Go", "Go"],
+        "Valeurs spéciales": ["TEST"],
+        "TEST": ["TEST1", "TEST2", "TEST3"],
         "Autres commandes": ["Go", "Stop"]
     }
 }
@@ -59,7 +94,7 @@ for game_name, game_categories in categories.items():
 
                     for col_index, button_value in enumerate(button_values[start_index:start_index+buttons_per_row]):
                         with row_buttons[col_index]:#Placement du bouton dans la colonne
-                            button_label = str(button_value)#Création du label du bouton à partir de sa valeur
+                            button_label = format_string(button_value)#Création du label du bouton à partir de sa valeur
 
                             key = f"{game_name}_{category_name}_{button_value}_{start_index}_{col_index}"#Clé unique pour chaque bouton afin d'éviter les conflits dans Streamlit
 
@@ -69,5 +104,6 @@ for game_name, game_categories in categories.items():
                                 except ValueError:
                                     osc_value = button_value#Si la conversion échoue (par exemple pour les commandes textuelles), on garde la valeur telle quelle
 
-                                client.send_message("/valeur", osc_value)#Envoi du message OSC avec l'adresse "/valeur" et la valeur du bouton
-                                st.success(f"{button_label} envoyé à {ip}:{port}")#Affichage d'un message de succès pour indiquer que le message OSC a été envoyé
+                                for client, ip in zip(clients, valid_ips):
+                                    client.send_message("/" + str(osc_value), osc_value)
+                                st.success(f"/{osc_value} envoyé à {len(clients)} clients")
