@@ -56,12 +56,59 @@ for ip in ips:
 
     # --- Catégories et listes de boutons ---
     categories = {
-    "jeux1": {
-        "Velo": ["velo_setWorld1_3", "velo_setWorld2_1", "velo_start", "Velo_4", "Velo_5", "Velo_6"],
-        "Valeurs spéciales": ["TEST"],
-        "TEST": ["TEST1", "TEST2", "TEST3"],
-        "Autres commandes": ["Start", "Stop", "Reset"]
-    },
+    "VELO": {
+    "VITESSE DU VELO": [
+        "/velo_cycle1speed",
+        "/velo_cycle2speed"
+    ],
+    "INPUT PLAYER MOVEMENT": [
+        "/velo_onJoystick1Left",
+        "/velo_onJoystick1Center",
+        "/velo_onJoystick1Right",
+        "/velo_onJoystick2Left",
+        "/velo_onJoystick2Center",
+        "/velo_onJoystick2Right"
+    ],
+    "INPUT PLAYER INTERACTION": [
+        "/velo_onButton1",
+        "/velo_onButton2"
+    ],
+    "OPTIONS": [
+        "/velo_reset",
+        "/velo_start",
+        "/velo_close"
+    ],
+    "CHANGE LA MAP 1": [
+        "/velo_setWorld1_1",
+        "/velo_setWorld1_2",
+        "/velo_setWorld1_3",
+        "/velo_setWorld1_4"
+    ],
+    "CHANGE LA MAP 2": [
+        "/velo_setWorld2_1",
+        "/velo_setWorld2_2",
+        "/velo_setWorld2_3",
+        "/velo_setWorld2_4"
+    ],
+    "CHANGE LA DIFFICULTE": [
+        "/velo_setDifficulty1",
+        "/velo_setDifficulty2",
+        "/velo_setDifficulty3",
+        "/velo_setDifficulty4"
+    ],
+    "VOXEL EVENT": [
+        "/velo_voxelEvent1",
+        "/velo_voxelEvent2",
+        "/velo_voxelEvent3",
+        "/velo_voxelEvent4"
+    ],
+    "MALUS/BONUS": [
+        "/velo_onMalus1",
+        "/velo_onMalus2",
+        "/velo_onBonus1",
+        "/velo_onBonus2"
+    ]
+},
     "jeux2": {
         "Valeurs fixes": ["Start", "Start", "Start"],
         "Valeurs spéciales": ["TEST"],
