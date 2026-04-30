@@ -125,72 +125,71 @@ for ip in ips:
         "/mime_robot_head",
         "/mime_robot_leftArm",
         "/mime_robot_rightArm",
-        "/mime_robot_leftLeg",
-        "/mime_robot_rightLeg",
+        "/mime_robot_legs",
         "/mime_robot_body"
     ],
     "CHICKEN": [
         "/mime_chicken_head",
         "/mime_chicken_leftArm",
         "/mime_chicken_rightArm",
-        "/mime_chicken_leftLeg",
-        "/mime_chicken_rightLeg",
+        "/mime_chicken_legs",
         "/mime_chicken_body"
     ],
     "SNOWMAN": [
         "/mime_snowman_head",
         "/mime_snowman_leftArm",
         "/mime_snowman_rightArm",
-        "/mime_snowman_leftLeg",
-        "/mime_snowman_rightLeg",
+        "/mime_snowman_legs",
         "/mime_snowman_body"
     ],
     "OCTOPUS": [
         "/mime_octopus_head",
         "/mime_octopus_leftArm",
         "/mime_octopus_rightArm",
-        "/mime_octopus_leftLeg",
-        "/mime_octopus_rightLeg",
+        "/mime_octopus_legs",
         "/mime_octopus_body"
     ],
     "CACTUS": [
         "/mime_cactus_head",
         "/mime_cactus_leftArm",
         "/mime_cactus_rightArm",
-        "/mime_cactus_leftLeg",
-        "/mime_cactus_rightLeg",
+        "/mime_cactus_legs",
         "/mime_cactus_body"
     ],
     "FRIES": [
         "/mime_fries_head",
         "/mime_fries_leftArm",
         "/mime_fries_rightArm",
-        "/mime_fries_leftLeg",
-        "/mime_fries_rightLeg",
+        "/mime_fries_legs",
         "/mime_fries_body"
     ],
     "ALIEN": [
         "/mime_alien_head",
         "/mime_alien_leftArm",
         "/mime_alien_rightArm",
-        "/mime_alien_leftLeg",
-        "/mime_alien_rightLeg",
+        "/mime_alien_legs",
         "/mime_alien_body"
     ],
     "ZOMBIE": [
         "/mime_zombie_head",
         "/mime_zombie_leftArm",
         "/mime_zombie_rightArm",
-        "/mime_zombie_leftLeg",
-        "/mime_zombie_rightLeg",
+        "/mime_zombie_legs",
         "/mime_zombie_body"
     ]
 },
-    "jeux3": {
-        "Valeurs fixes": ["Go", "Go", "Go"],
-        "Valeurs spéciales": ["TEST"],
-        "TEST": ["TEST1", "TEST2", "TEST3"],
-        "Autres commandes": ["Go", "Stop"]
+    "VOXEL": {
+        "OPTIONS": [
+            "/voxel_reset",
+            "/voxel_close",
+            ],
+        "BEHAVIOR": [
+            "voxel_voxelTransition",
+            "voxel_voxelEmotion1",
+            "voxel_voxelEmotion2",
+            "voxel_voxelEmotion3",
+            "voxel_voxelEmotion4",
+        ]
     }
 }
     games={
