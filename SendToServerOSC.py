@@ -176,6 +176,10 @@ for ip in ips:
         "/mime_zombie_rightArm",
         "/mime_zombie_legs",
         "/mime_zombie_body"
+    ],
+    "TEAM": [
+        "/mime_toBlueTeam",
+        "/mime_toOrangeTeam"
     ]
 },
     "VOXEL": {
